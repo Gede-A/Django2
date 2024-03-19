@@ -1,6 +1,12 @@
-from django.urls import path
-from .views import pdfExtractionView
+
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import PDFDocumentViewSet, ExtractedDataViewSet
+
+router = DefaultRouter()
+router.register(r'pdf_documents', PDFDocumentViewSet)
+router.register(r'extracted_data', ExtractedDataViewSet)
 
 urlpatterns = [
-    path("", pdfExtractionView, "home"),
+    path('', include(router.urls)),
 ]
